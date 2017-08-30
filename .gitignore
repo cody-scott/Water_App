@@ -96,3 +96,5 @@ ENV/
 .ropeproject
 .idea/*
 *.sqlite3
+
+TestData/*

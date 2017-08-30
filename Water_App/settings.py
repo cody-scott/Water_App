@@ -145,3 +145,7 @@ SITE_ID = 1
 REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
 }
+
+QC_SOURCE_PATH = r'H:\SHARED\Water\GIS\QC_WaterInfrastructure'
+if DEBUG:
+    QC_SOURCE_PATH = os.path.join(BASE_DIR, "TestData")

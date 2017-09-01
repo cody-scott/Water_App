@@ -217,7 +217,14 @@ def compare_qc_item(compare_function, qc_items, rmw_id, sde_items):
         }
     else:
         # No changes detected. Maybe should return other then none?
-        return None
+        return {
+            'id': rmw_id,
+            'differences': "No Differences",
+            'new_shape': reproject_to_epsg4326(qc_feature.shape).JSON,
+            'old_shape': reproject_to_epsg4326(sde_feature.shape).JSON,
+            'qc_approved': qc_feature.qc_approved,
+            'qc_comments': qc_feature.qc_comments
+        }
 
 
 # region Class Builders

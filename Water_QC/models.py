@@ -74,7 +74,7 @@ class FeatureClass(models.Model):
 class Feature(models.Model):
     feature_class = models.ForeignKey(FeatureClass)
     rmwid = models.CharField(max_length=25)
-    qc_comments = models.TextField()
+    qc_comments = models.CharField(max_length=200, null=True)
     qc_approved = models.NullBooleanField()
 
 

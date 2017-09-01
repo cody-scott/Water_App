@@ -88,24 +88,66 @@ def save_results(results, geodatabase_object):
         new_fc.feature_type = ft
         new_fc.save()
 
+        func = None
         if ct.change_type == "Updated":
-            updated_features(item.get("data"))
+            func = updated_features
         elif ct.change_type == "Deleted":
-            delete_features(item.get("data"))
+            func = delete_features
+        elif ct.change_type == "Added":
+            func = added_features
+
+        if func is not None:
+            func(item.get("data"), new_fc)
+
+
+def added_features(data, feature_class_object):
+    for item in data:
+        new_feature = create_feature(item, feature_class_object)
+
+
+def delete_features(data, feature_class_object):
+    for item in data:
+        new_feature = create_feature(item, feature_class_object)
+
+
+def updated_features(data, feature_class_object):
+    for item in data:
+        if item is None:
+            continue
+
+        new_feature = create_feature(item, feature_class_object)
+        differences = item.get("differences")
+        if isinstance(differences, list):
+            update_feature_changes(differences, new_feature)
+
+
+def create_feature(item, feature_class_object):
+    new_feature = models.Feature()
+    new_feature.rmwid = item.get("id")
+
+    qc_a = item.get("qc_approved")
+    qc_c = item.get("qc_comments")
+    if qc_a is not None:
+        if qc_a == "Yes":
+            qc_a = True
         else:
-            added_features(item.get("data"))
+            qc_a = False
+
+    new_feature.qc_approved = qc_a
+    new_feature.qc_comments = qc_c
+    new_feature.feature_class = feature_class_object
+    new_feature.save()
+    return new_feature
 
 
-def added_features(data):
-    pass
-
-
-def delete_features(data):
-    pass
-
-
-def updated_features(data):
-    pass
+def update_feature_changes(data, feature_object):
+    for item in data:
+        new_change = models.FeatureChange()
+        new_change.change_field = item.get("field")
+        new_change.old_value = item.get("old_value")
+        new_change.new_value = item.get("new_value")
+        new_change.feature = feature_object
+        new_change.save()
 
 
 def _check_city(geodatabase):

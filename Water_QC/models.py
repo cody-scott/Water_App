@@ -39,6 +39,9 @@ class MonthFolder(models.Model):
     create_date = models.DateTimeField(default=timezone.now)
     edit_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["id"]
+
 
 # Create your models here.
 class Geodatabase(models.Model):
@@ -55,6 +58,14 @@ class Geodatabase(models.Model):
     create_date = models.DateTimeField(default=timezone.now)
     edit_date = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "{}".format(self.geodatabase_name)
+
+    class Meta:
+        ordering = ['city']
+
+
+
 
 class FeatureClass(models.Model):
     geodatabase = models.ForeignKey(
@@ -69,6 +80,9 @@ class FeatureClass(models.Model):
 
     create_date = models.DateTimeField(default=timezone.now)
     edit_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['feature_type']
 
 
 class Feature(models.Model):

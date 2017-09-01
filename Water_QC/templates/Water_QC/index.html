@@ -1,1 +1,23 @@
 {% extends "Water_App/base.html" %}
+
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>QC Folders</h3>
+            <hr>
+        </div>
+    </div>
+        {% for item in object_list %}
+            <div class="row">
+                <div class="col">
+                    <a href="/folder={{ item.id }}"><h5>{{ item.folder_name }}</h5></a>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

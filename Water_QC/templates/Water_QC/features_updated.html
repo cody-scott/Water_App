@@ -1,0 +1,61 @@
+
+<div class="row">
+    <div class="col">
+        <h3>Updated Features</h3>
+    </div>
+</div>
+<br>
+{% for item in Updated %}
+    <div class="row">
+        <div class="col"><h4>Feature: {{ item.feature_type }}</h4></div>
+    </div>
+    {% for feat in item.feature_set.all %}
+        <div id="content_area">
+            <div id="{{ feat.id }}">
+                <div class="row">
+                    <div class="col-sm-12"><h5>ID: {{ feat.rmwid }}</h5></div>
+                </div>
+
+                <details>
+                    <summary style="font-size: 20px;">Changes</summary>
+                    {% for change in feat.featurechange_set.all %}
+                        <div class="row">
+                            <div class="col-sm-3"><h6>{{ change.change_field }}</h6></div>
+                            {% if change.change_field != "SHAPE" %}
+                                <div class="col-sm-3"><h6>{{ change.old_value }}</h6></div>
+                                <div class="col-sm-3"><h6>{{ change.new_value }}</h6></div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </details>
+
+                <br>
+                <div class="row">
+                    <div class="col-3">
+                        <label class="checkbox">
+                            <input class="accept" id="accept" name="accept" onclick="" type="checkbox" value="y">
+                            Accept
+                        </label>
+                    </div>
+                    <div class="col-3">
+                        <label class="checkbox">
+                            <input class="reject" id="reject" name="reject" onclick="" type="checkbox" value="y">
+                            Reject
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <textarea class="form-control" id="commentstextarea" rows="3" placeholder="Comments"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <hr>
+
+
+    {#    {{ item.feature_type }}#}
+{% endfor %}

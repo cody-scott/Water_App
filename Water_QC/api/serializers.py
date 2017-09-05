@@ -59,6 +59,7 @@ class FeatureSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('feature_class', 'rmwid', )
 
+
 class FeatureClassSerializer(serializers.ModelSerializer):
     feature_type = serializers.StringRelatedField(many=False)
     change_type = serializers.StringRelatedField(many=False)

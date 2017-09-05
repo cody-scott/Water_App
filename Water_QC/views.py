@@ -21,4 +21,11 @@ class MonthFolder(DetailView):
 
 class Geodatabase(DetailView):
     model = models.Geodatabase
-    template_name = "Water_QC/geodatabase.html"
+    template_name = "Water_QC/review_data.html"
+
+    def get_context_data(self, **kwargs):
+        obj = kwargs.get("object")
+        kwargs['Added'] = obj.featureclass_set.filter(change_type=1).all()
+        kwargs['Deleted'] = obj.featureclass_set.filter(change_type=2).all()
+        kwargs['Updated'] = obj.featureclass_set.filter(change_type=3).all()
+        return super(Geodatabase, self).get_context_data(**kwargs)

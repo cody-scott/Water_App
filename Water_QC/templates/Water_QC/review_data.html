@@ -1,0 +1,64 @@
+{% extends "Water_App/base.html" %}
+
+
+{% block head %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="folder={{ object.folder.id }}"><h6>Return</h6></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Review Data</h2>
+                <hr>
+            </div>
+        </div>
+
+
+        {% include 'Water_QC/features_updated.html' %}
+
+{#        <div id="content_area">#}
+{#            <div id="1">#}
+                {#                Each pages content here#}
+{#                <div class="row">#}
+{#                    <div class="col-sm-12"><h5>ID: RMW20</h5></div>#}
+{#                </div>#}
+{#                <details>#}
+{#                    <summary style="font-size: 20px;"><strong>Changes</strong></summary>#}
+{#                    <div class="row">#}
+{#                        <div class="col-sm-3"><h6>Pressure Zone</h6></div>#}
+{#                        <div class="col-sm-3"><h6>null</h6></div>#}
+{#                        <div class="col-sm-3"><h6>2</h6></div>#}
+{#                    </div>#}
+{#                </details>#}
+{#                <br>#}
+{#                <div class="row">#}
+{#                    <div class="col-3">#}
+{#                        <label class="checkbox">#}
+{#                            <input class="accept" id="accept" name="accept" onclick="" type="checkbox" value="y">#}
+{#                            Accept#}
+{#                        </label>#}
+{#                    </div>#}
+{#                    <div class="col-3">#}
+{#                        <label class="checkbox">#}
+{#                            <input class="reject" id="reject" name="reject" onclick="" type="checkbox" value="y">#}
+{#                            Reject#}
+{#                        </label>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row">#}
+{#                    <div class="col-6">#}
+{#                        <div class="form-group">#}
+{#                            <textarea class="form-control" id="commentstextarea" rows="3" placeholder="Comments"></textarea>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+    </div>
+{% endblock %}

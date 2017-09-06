@@ -1,5 +1,5 @@
 colorama==0.3.9
-Django==1.11.3
+Django==1.11.5
 django-filter==1.0.4
 django-widget-tweaks==1.4.1
 djangorestframework==3.6.3

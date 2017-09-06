@@ -17,6 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP_ROOT = os.path.join(PROJECT_ROOT, 'Water_App')
 
+ALLOWED_HOSTS = ["*"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -25,9 +26,9 @@ APP_ROOT = os.path.join(PROJECT_ROOT, 'Water_App')
 SECRET_KEY = 'x26s%2-!da4f09prmen=+)m&&u8n1!*#+vn5_zd+y!1lvrhd%!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 # GDAL_LIBRARY_PATH = 'F:\\Installs\\OSGeo4W\\bin\\gdal202.dll'
 # SPATIALITE_LIBRARY_PATH = 'F:\\Installs\\OSGeo4W\\bin\\spatialite4.dll'

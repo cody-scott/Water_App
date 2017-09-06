@@ -29,8 +29,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-GDAL_LIBRARY_PATH = 'F:\\Installs\\OSGeo4W\\bin\\gdal202.dll'
-SPATIALITE_LIBRARY_PATH = 'F:\\Installs\\OSGeo4W\\bin\\spatialite4.dll'
+# GDAL_LIBRARY_PATH = 'F:\\Installs\\OSGeo4W\\bin\\gdal202.dll'
+# SPATIALITE_LIBRARY_PATH = 'F:\\Installs\\OSGeo4W\\bin\\spatialite4.dll'
 
 # Application definition
 
@@ -45,10 +45,10 @@ INSTALLED_APPS = [
 
     'widget_tweaks',
 
-    'django.contrib.gis',
+    # 'django.contrib.gis',
 
     'rest_framework',
-    'rest_framework_gis',
+    # 'rest_framework_gis',
 
     'Water_QC.apps.WaterQCConfig',
 ]

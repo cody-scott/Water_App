@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-# from django.db import models
-from django.contrib.gis.db import models
+from django.db import models
+# from django.contrib.gis.db import models
 from django.utils import timezone
 
 
@@ -90,6 +90,9 @@ class Feature(models.Model):
     rmwid = models.CharField(max_length=25)
     qc_comments = models.CharField(max_length=200, null=True)
     qc_approved = models.NullBooleanField()
+
+    class Meta:
+        ordering = ['rmwid']
 
 
 class FeatureChange(models.Model):

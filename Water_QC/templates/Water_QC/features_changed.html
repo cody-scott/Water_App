@@ -1,0 +1,113 @@
+
+<div class="row">
+    <div class="col">
+        <h3>{{ change_type }} Features</h3>
+        <input type="button" value="Toggle {{ change_type }}" class="btn btn-sm btn-outline-secondary" onclick="toggle_vis('#{{ change_type }}')">
+    </div>
+</div>
+<br>
+
+<div id="{{ change_type }}">
+    {% for item in data %}
+        <div class="type_data" id="{{ change_type }} {{ item.feature_type }}">
+            <div class="row">
+                <div class="col">
+                    <h4>Feature: {{ item.feature_type }}</h4>
+                    <input type="button" value="Toggle {{ change_type }} {{ item.feature_type }}" class="btn btn-sm btn-outline-secondary" onclick="toggle_vis('#{{ change_type }}_{{ item.feature_type }}')">
+                </div>
+            </div>
+            <br>
+            <div id="{{ change_type }}_{{ item.feature_type }}">
+                {% for feat in item.feature_set.all %}
+                    {#                    <div id="{{ change_type }}_{{ item.feature_type }}">#}
+                    <div>
+                        <div class="parent_id" id="{{ feat.id }}">
+                            <div class="row">
+                                <div class="col-sm-12"><h5>ID: {{ feat.rmwid }}</h5></div>
+                            </div>
+                            {% if updated is True %}
+                                <div class="row">
+                                    <details {% if feat.qc_approved is None %} open {% endif %}>
+                                        <summary style="font-size: 20px;">Changes</summary>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-default">
+                                            <tr>
+                                                <th>Field</th>
+                                                <th>Old Value</th>
+                                                <th>New Value</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for change in feat.featurechange_set.all %}
+                                                <tr>
+                                                    <td>{{ change.change_field }}</td>
+                                                    <td>{{ change.old_value }}</td>
+                                                    <td>{{ change.new_value }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </details>
+                                </div>
+                            {% endif %}
+                            <br>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="checkbox">
+                                        <input {% if feat.qc_approved is True %} checked {% endif %} class="accept" id="accept_{{ feat.id }}" name="accept" onclick="accept_click(this)" type="checkbox" value="y">
+                                        Accept
+                                    </label>
+                                </div>
+                                <div class="col-3">
+                                    <label class="checkbox">
+                                        <input {% if feat.qc_approved is False %} checked {% endif %} class="reject" id="reject_{{ feat.id }}" name="reject" onclick="reject_click(this)" type="checkbox" value="y">
+                                        Reject
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                            <textarea class="form-control" id="commentstextarea_{{ feat.id }}" rows="3" placeholder="Comments" maxlength="199" onblur="push_change_to_api({{ feat.id }})"
+                                    {% if feat.qc_approved is not False %} hidden="hidden" {% endif %}
+                            >{% if feat.qc_comments is not None %}{{ feat.qc_comments }}{% endif %}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    {% spaceless %}
+                                        {% if change_type == "Added" %}
+                                            <textarea class="copy_query_{{ feat.id }}" hidden="hidden">
+arcpy.SelectLayerByAttribute_management(r"{{ change_type }}\QC_Region{{ item.feature_type }}_ToBe{{ change_type }}", "NEW_SELECTION", "AreaMunicipal_ID = {{ feat.rmwid }}")
+mxd.activeDataFrame.zoomToSelectedFeatures()
+                                    </textarea>
+                                        {% else %}
+                                            <textarea class="copy_query_{{ feat.id }}" hidden="hidden">
+arcpy.SelectLayerByAttribute_management(r"{{ change_type }}\QC_Region{{ item.feature_type }}_ToBe{{ change_type }}", "NEW_SELECTION", "RMWID LIKE '{{ feat.rmwid }}'")
+mxd.activeDataFrame.zoomToSelectedFeatures()
+                                    </textarea>
+                                        {% endif %}
+                                        <input type="button" class="btn btn-sm btn-outline-primary" value="Copy Query" onclick="copy_query_click({{ feat.id }})">
+                                        </div>
+                                    {% endspaceless %}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+    {% empty %}
+        <div class="row">
+            <div class="col">
+                <h6>No Features {{ change_type }}</h6>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+</div>

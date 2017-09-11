@@ -44,6 +44,8 @@
                                                     <td>{{ change.old_value }}</td>
                                                     <td>{{ change.new_value }}</td>
                                                 </tr>
+                                            {% empty %}
+                                                <tr><td colspan="3">Change in unchecked field</td></tr>
                                             {% endfor %}
                                             </tbody>
                                         </table>

@@ -98,3 +98,4 @@ ENV/
 *.sqlite3
 
 TestData/*
+static/*

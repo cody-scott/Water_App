@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ["*"]
 SECRET_KEY = 'x26s%2-!da4f09prmen=+)m&&u8n1!*#+vn5_zd+y!1lvrhd%!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = []
 
@@ -92,7 +92,8 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db_debug.sqlite3'),
+            # 'NAME': os.path.join(BASE_DIR, 'db_debug.sqlite3'),
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 else:

@@ -27,7 +27,13 @@ function reject_click(e) {
     push_change_to_api(id);
 }
 
+// var last_feature = null;
 function copy_query_click(e) {
+    // var tmp = $("#1").closest(".type_data").attr("id");
+    // if (last_feature === tmp) {
+    //
+    // }
+
     var text_area = $(".copy_query_" + e);
     $(text_area).removeAttr("hidden");
     $(text_area).select();
@@ -72,7 +78,10 @@ function push_change_to_api(feature_id) {
         },
         success: function() {
             console.log("Success")
-        }
+        },
+        error: function(e) {
+            console.log(e);
+        },
     });
 }
 

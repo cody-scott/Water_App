@@ -410,7 +410,7 @@ def deleted_feature(feature_name, sde_feature, qc_feature_path):
     deleted_ids = get_deleted_rmwid(qc_feature_path, comments_field)
     sde_feature = get_or_load_sde(feature_name, sde_feature)
 
-    with arcpy.da.SearchCursor(sde_feature, ["RMWID", "SHAPE@"], build_sql(deleted_ids)) as sc:
+    with arcpy.da.SearchCursor(qc_feature_path, ["RMWID", "SHAPE@"], build_sql(deleted_ids)) as sc:
         for row in sc:
             removed_features += process_deleted_feature(deleted_ids, row)
     return removed_features

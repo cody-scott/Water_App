@@ -26,13 +26,14 @@ QC_IGNORE_FOLDERS = [
     '2017-06',
     '2017-07',
     '2017-08',
+    # '2017-09',
 ]
 
 
 def load_new_data():
     folders = get_folders(QC_SOURCE_PATH)
     for folder in folders:
-        existing_folder = models.MonthFolder.objects.filter(folder_name=folder).first() #type: models.Geodatabase
+        existing_folder = models.MonthFolder.objects.filter(folder_name=folder).first()
         existing_gdbs = []
         if existing_folder is not None:
             new_folder = existing_folder

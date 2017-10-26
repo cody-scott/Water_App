@@ -5,14 +5,21 @@
 {% block head %}
     <meta name="csrf-token" content="{{ csrf_token }}">
 {% endblock %}
+
+{% block return_link %}
+    <li class="nav-item">
+        <a class="nav-link" href="folder={{ object.folder.id }}">Return</a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <a href="folder={{ object.folder.id }}"><h6>Return</h6></a>
-            </div>
-        </div>
-        <br>
+{#        <div class="row">#}
+{#            <div class="col">#}
+{#                <a href="folder={{ object.folder.id }}"><h6>Return</h6></a>#}
+{#            </div>#}
+{#        </div>#}
+{#        <br>#}
         <div class="row">
             <div class="col">
                 <h2 class="display-4">{{ object.folder.folder_name }} - {{ object.city.city_name }} - Data</h2>

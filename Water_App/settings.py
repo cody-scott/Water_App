@@ -66,6 +66,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Water_App.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -88,12 +90,15 @@ WSGI_APPLICATION = 'Water_App.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if DEBUG:
+TESTING = False
+QC_SOURCE_PATH = r'H:\SHARED\Water\GIS\QC_WaterInfrastructure'
+
+if TESTING:
+    QC_SOURCE_PATH = os.path.join(BASE_DIR, "TestData")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            # 'NAME': os.path.join(BASE_DIR, 'db_debug.sqlite3'),
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'NAME': os.path.join(BASE_DIR, 'db_debug.sqlite3'),
         }
     }
 else:
@@ -156,6 +161,3 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
 }
 
-QC_SOURCE_PATH = r'H:\SHARED\Water\GIS\QC_WaterInfrastructure'
-if DEBUG:
-    QC_SOURCE_PATH = os.path.join(BASE_DIR, "TestData")

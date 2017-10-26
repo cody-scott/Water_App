@@ -54,9 +54,9 @@ class FeatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feature
         fields = (
-            'id', 'rmwid', 'qc_comments', 'qc_approved', 'featurechange_set'
+            'id', 'rmwid', 'qc_comments', 'qc_approved', 'featurechange_set', 'feature_class'
         )
-        read_only_fields = ('rmwid', 'featurechange_set')
+        read_only_fields = ('rmwid', 'featurechange_set', 'feature_class')
 
 
 class FeatureClassSerializer(serializers.ModelSerializer):

@@ -4,14 +4,15 @@
 {% block head %}
     <meta name="csrf-token" content="{{ csrf_token }}">
 {% endblock %}
+
+{% block return_link %}
+    <li class="nav-item">
+        <a class="nav-link" href="/">Return</a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <a href="/"><h6>Return</h6></a>
-            </div>
-        </div>
-        <br>
         <div class="row">
             <div class="col">
                 <h2 class="display-4">{{ object.folder_name }} - Geodatabase</h2>

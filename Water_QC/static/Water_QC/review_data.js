@@ -111,3 +111,65 @@ $(document).ready(function() {
             { 'X-CSRFToken': $('meta[name="csrf-token"]').attr('content') }
     });
 });
+
+
+function get_unchecked_items() {
+    var ls = [];
+    $.each($(".parent_id"), function(index, item) {
+        try {
+            var cbox = $(item).find("input:checkbox");
+            var acc = cbox[0];
+            var rej = cbox[1];
+            if (acc.checked === false && rej.checked === false) {
+                ls.push(item);
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
+    });
+
+    return [ls.length, ls]
+}
+
+function accept_unchecked() {
+    var acc;
+    var rej;
+    var cbox;
+    var ls = [];
+    $.each($(".parent_id"), function(index, item) {
+        try {
+            cbox = $(item).find("input:checkbox");
+            acc = cbox[0];
+            rej = cbox[1];
+            if (acc.checked === false && rej.checked === false) {
+                acc.click();
+                ls.push(item);
+            }
+        }
+        catch(err) {
+            console.log(err);
+        }
+    });
+}
+
+function reject_comments_filled() {
+    var acc;
+    var rej;
+    var ls = [];
+    $.each($("textarea.form-control"), function(index, item) {
+        try {
+            if ($(item).val()) {
+                var parent = $(item).parent().parent().parent().parent()[0];
+                var cbox = $(parent).find("input:checkbox");
+                acc = cbox[0];
+                rej = cbox[1];
+                if (rej.checked === false) { rej.click()}
+                ls.push([acc, rej]);
+            }
+        }
+        catch(err) {
+            console.log(err)
+        }
+    });
+}
